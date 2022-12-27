@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-hover mt-3">
+        <thead>
+          <th>Kategori Adı</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let kategori of kategoriler">
+            <td>{{ kategori.adi }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="frm" (ngSubmit)="Kaydet()">
+            <label>Kategori Adı</label>
+            <input class="form-control" type="text" formControlName="adi" />
+            <input type="hidden" formControlName="kid" />
+            <input
+              type="submit"
+              class="btn btn-outline-primary"
+              value="Kategoriyi Ekle"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

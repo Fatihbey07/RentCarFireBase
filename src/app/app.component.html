@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><img
+        src="../assets/profil.png"
+        alt="Fatih Rent A Car"
+        width="30"
+        height="24"
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul
+        class="navbar-nav me-auto mb-3 mb-lg-0"
+        *ngIf="uye | async as user; else loginButton"
+      >
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home"
+            ><i class="bi bi-house-fill"></i> Ana Sayfa</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/araba"
+            ><i class="bi bi-car-front-fill"></i> Arabalar</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/kategori"
+            ><i class="bi bi-bookmarks-fill"></i> Kategoriler</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="/uyeler"
+            *ngIf="user.admin == 1"
+            ><i class="bi bi-people-fill"> </i> Üyeler</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/signup"
+            ><i class="bi bi-people-fill"> </i> Üye Ekle</a
+          >
+        </li>
+      </ul>
+      <ul
+        class="navbar-nav me-auto mb-2 mb-lg-0"
+        *ngIf="uye | async as user; else loginButton"
+      >
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/profil"
+            ><i class="bi bi-person-check"></i> {{ user.displayName }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="#"
+            (click)="OturumKapat()"
+            >Oturumu Kapat <i class="bi bi-box-arrow-right"></i
+          ></a>
+        </li>
+      </ul>
+
+      <ng-template #loginButton>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="login"
+              ><i class="bi bi-person"></i>Oturum Aç</a
+            >
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+  </div>
+</nav>
+<div style="height: 50px"></div>
+
+<router-outlet> </router-outlet>

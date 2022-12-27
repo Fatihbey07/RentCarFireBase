@@ -1,0 +1,143 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <th>Üye Fotosu</th>
+          <th>Üye Adı</th>
+          <th>Admin mi?</th>
+          <th>Görüntüle</th>
+          <th>Düzenle</th>
+          <th>Sil</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let uye of uyeler">
+            <td>
+              <img
+                [src]="uye.foto"
+                width="120px"
+                height="120px"
+                alt="Henüz Foto Yok."
+              />
+            </td>
+            <td>
+              {{ uye.displayName }}
+            </td>
+            <td>
+              <span class="badge bg-success" *ngIf="uye.admin == 1">Evet</span>
+              <span class="badge bg-danger" *ngIf="uye.admin == 0">Hayır</span>
+            </td>
+            <td>
+              <button
+                class="btn btn-info ms-3"
+                (click)="Goruntule(uye, modaldetay)"
+              >
+                Detay
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-warning ms-3"
+                (click)="Duzenle(uye, modalEkleDuzenle)"
+              >
+                Düzenle
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-danger ms-3" (click)="Sil(uye)">
+                Üyeyi Sil
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <div class="modal modal-sm" tabindex="-1" #modaldetay>
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ modalBaslik }}</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <!-- <div class="modal-body">
+                    <img class="img-thumbnail" [src]="uye.foto" alt="" />
+                    <ul>
+                      <li>{{ uye.displayName }}</li>
+                    </ul>
+                    <ul>
+                      <li>{{ uye.email }}</li>
+                    </ul>
+                    <ul>
+                      <li>{{ uye.tel }}</li>
+                    </ul>
+                    <ul>
+                      <li>{{ uye.adres }}</li>
+                    </ul>
+                  </div> -->
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="modal" tabindex="-1" #modalEkleDuzenle>
+        <div class="modal-dialog">
+          <form [formGroup]="frm" (ngSubmit)="UyeEkleDuzenle()">
+            <div class="modal-content">
+              <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">{{ modalBaslik }}</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Üye Adı Soyadı</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="displayName"
+                  />
+                  <label>Üye E-Posta</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="email"
+                  />
+
+                  <label>Yönetici mi</label>
+                  <select class="form-control" formControlName="admin">
+                    <option value="1">Evet</option>
+                    <option value="0">Hayır</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  value="Kaydet"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Kapat
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

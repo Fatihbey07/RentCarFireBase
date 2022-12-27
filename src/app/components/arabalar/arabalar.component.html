@@ -1,0 +1,367 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-sm">
+        <thead class="bg-primary text-white">
+          <th>Araba Foto</th>
+          <th>Araba Adı</th>
+          <th>Araba Modeli</th>
+          <th>Düzenle</th>
+          <th>Sil</th>
+          <th>Resim Ekle</th>
+        </thead>
+        <tbody *ngFor="let araba of arabalar">
+          <tr>
+            <td>
+              <img
+                width="120"
+                height="75"
+                [src]="araba.foto || 'assets/profil.png'"
+              />
+            </td>
+            <td>{{ araba.arabaadi }}</td>
+            <td>{{ araba.arabamodel }}</td>
+            <td>
+              <button
+                class="btn btn-warning"
+                (click)="Duzenle(araba, modalDuzenle)"
+              >
+                Düzenle
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="Sil(araba)">Sil</button>
+            </td>
+            <td>
+              <input
+                #inputField
+                type="file"
+                hidden
+                (change)="ResimYukle($event, araba)"
+              />
+              <button class="btn btn-primary" (click)="inputField.click()">
+                Resim Seç
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal" tabindex="-1" #modalEkleDuzenle>
+        <div class="modal-dialog">
+          <form [formGroup]="frm" (ngSubmit)="EkleKaydet()">
+            <div class="modal-content">
+              <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">{{ modalBaslik }}</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Araba Adı</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="arabaadi"
+                    required
+                  />
+                  <label>Araba Plakası</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="plaka"
+                  />
+                  <label>Kiralık</label>
+                  <select
+                    required
+                    class="form-control"
+                    formControlName="kiralik"
+                  >
+                    <option value="Kiralandı">Kiralandı</option>
+                    <option value="Kiralanmadı">Kiralanmadı</option>
+                  </select>
+                  <label for="">Kiralama Ücreti (Günlük)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="kirucret"
+                  />
+                  <label>Araba Kategorisi</label>
+                  <select
+                    required
+                    class="form-control"
+                    formControlName="categoryId"
+                  >
+                    <option
+                      [value]="kategori.adi"
+                      *ngFor="let kategori of kategoriler"
+                    >
+                      {{ kategori.adi }}
+                    </option>
+                  </select>
+                  <label>Vites Türü</label>
+                  <select required class="form-control" formControlName="vites">
+                    <option value="Otomatik">Otomatik</option>
+                    <option value="Manuel">Manuel</option>
+                    <option value="Yarı Otomatik">Yarı Otomatik</option>
+                  </select>
+                  <label>Kim Kiraladı</label>
+                  <select class="form-control" formControlName="kimkiraladi">
+                    <option value="">Kiralanmadı</option>
+                    <option
+                      *ngFor="let uye of uyeler"
+                      [value]="uye.displayName"
+                    >
+                      {{ uye.displayName }}
+                    </option>
+                  </select>
+
+                  <label>Arabanın Modeli</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="arabamodel"
+                  />
+                  <input
+                    class="form-control"
+                    formControlName="kirtarih"
+                    type="hidden"
+                  />
+                  <input
+                    class="form-control"
+                    formControlName="iadetarih"
+                    type="hidden"
+                  />
+                  <label>Araba Fotoğrafı</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  value="Kaydet"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Kapat
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal" tabindex="-1" #modalDuzenle>
+        <div class="modal-dialog">
+          <form [formGroup]="frm" (ngSubmit)="DuzenleKaydet()">
+            <div class="modal-content">
+              <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">{{ modalBaslik }}</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Araba Adı</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="arabaadi"
+                    required
+                  />
+                  <label>Araba Plakası</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="plaka"
+                  />
+                  <label>Kiralık</label>
+                  <select
+                    required
+                    class="form-control"
+                    formControlName="kiralik"
+                  >
+                    <option value="Kiralandı">Kiralandı</option>
+                    <option value="Kiralanmadı">Kiralanmadı</option>
+                  </select>
+                  <label for="">Kiralama Ücreti (Günlük)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="kirucret"
+                  />
+                  <label>Araba Kategorisi</label>
+                  <select
+                    required
+                    class="form-control"
+                    formControlName="categoryId"
+                  >
+                    <option
+                      [value]="kategori.adi"
+                      *ngFor="let kategori of kategoriler"
+                    >
+                      {{ kategori.adi }}
+                    </option>
+                  </select>
+                  <label>Vites Türü</label>
+                  <select required class="form-control" formControlName="vites">
+                    <option value="Otomatik">Otomatik</option>
+                    <option value="Manuel">Manuel</option>
+                    <option value="Yarı Otomatik">Yarı Otomatik</option>
+                  </select>
+                  <label>Kim Kiraladı</label>
+                  <select class="form-control" formControlName="kimkiraladi">
+                    <option value="">Kiralanmadı</option>
+                    <option
+                      *ngFor="let uye of uyeler"
+                      [value]="uye.displayName"
+                    >
+                      {{ uye.displayName }}
+                    </option>
+                  </select>
+
+                  <label>Arabanın Modeli</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="arabamodel"
+                  />
+                  <input
+                    class="form-control"
+                    formControlName="kirtarih"
+                    type="hidden"
+                  />
+                  <input
+                    class="form-control"
+                    formControlName="iadetarih"
+                    type="hidden"
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  value="Kaydet"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Kapat
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal" tabindex="-1" #modalSil>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title">{{ modalBaslik }}</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <h6 *ngIf="secAraba">
+                {{ secAraba.arabaadi }} adlı Araba Silinecektir Onaylıyor
+                musunuz?
+              </h6>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-outline-danger"
+                *ngIf="secAraba"
+                (click)="Sil(secAraba)"
+              >
+                Sil
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                data-bs-dismiss="modal"
+              >
+                Kapat
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" tabindex="-1" #modalKirala>
+        <div class="modal-dialog">
+          <form [formGroup]="frm" (ngSubmit)="EkleKaydet()">
+            <div class="modal-content">
+              <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">{{ modalBaslik }}</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Kiralık</label>
+                  <select class="form-control" formControlName="kiralik">
+                    <option value="Kiralandı">Kiralandı</option>
+                    <option value="Kiralanmadı">Kiralanmadı</option>
+                  </select>
+
+                  <label>Kiralanma Tarihi</label>
+                  <input
+                    class="form-control"
+                    formControlName="kirtarih"
+                    type="text"
+                  />
+                  <label>İade Tarihi</label>
+                  <input
+                    required
+                    class="form-control"
+                    formControlName="iadetarih"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  value="Kaydet"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Kapat
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mt-5 ms-5">
+      <button class="btn btn-warning btn-full" (click)="Ekle(modalEkleDuzenle)">
+        <i class="bi bi-car-front"></i>Araba Ekle
+      </button>
+    </div>
+  </div>
+</div>
