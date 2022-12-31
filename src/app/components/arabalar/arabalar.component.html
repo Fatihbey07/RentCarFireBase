@@ -2,15 +2,24 @@
   <div class="row">
     <div class="col-md-12">
       <table class="table table-sm">
-        <thead class="bg-primary text-white">
+        <thead class="bg-dark text-white">
           <th>Araba Foto</th>
           <th>Araba Adı</th>
           <th>Araba Modeli</th>
+          <th>Yakıt Tipi</th>
+          <th>Kiralanma Durumu</th>
+          <th>Kiralanma Tarihi</th>
+          <th>İade Tarihi</th>
+          <th>Vites</th>
+          <th>Model</th>
+          <th>Kiralik Ücret</th>
+          <th>Kim Kiraladı</th>
+          <th>Kime Kiraladı</th>
           <th>Düzenle</th>
           <th>Sil</th>
           <th>Resim Ekle</th>
         </thead>
-        <tbody *ngFor="let araba of arabalar">
+        <tbody class="bg-light" *ngFor="let araba of arabalar">
           <tr>
             <td>
               <img
@@ -21,6 +30,16 @@
             </td>
             <td>{{ araba.arabaadi }}</td>
             <td>{{ araba.arabamodel }}</td>
+            <td>{{ araba.categoryId }}</td>
+            <td *ngIf="araba.kiralik == 1">Kiralandi</td>
+            <td *ngIf="araba.kiralik == 0">Kiralanmadı</td>
+            <td>{{ araba.kirtarih }}</td>
+            <td>{{ araba.iadetarih }}</td>
+            <td>{{ araba.vites }}</td>
+            <td>{{ araba.arabamodel }}</td>
+            <td>{{ araba.kirucret }}</td>
+            <td>{{ araba.kimkiraladi }}</td>
+            <td>{{ araba.kimekiraladi }}</td>
             <td>
               <button
                 class="btn btn-warning"
@@ -50,7 +69,7 @@
         <div class="modal-dialog">
           <form [formGroup]="frm" (ngSubmit)="EkleKaydet()">
             <div class="modal-content">
-              <div class="modal-header bg-primary text-white">
+              <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title">{{ modalBaslik }}</h5>
                 <button
                   type="button"
@@ -80,8 +99,8 @@
                     class="form-control"
                     formControlName="kiralik"
                   >
-                    <option value="Kiralandı">Kiralandı</option>
-                    <option value="Kiralanmadı">Kiralanmadı</option>
+                    <option value="1">Kiralandı</option>
+                    <option value="0">Kiralanmadı</option>
                   </select>
                   <label for="">Kiralama Ücreti (Günlük)</label>
                   <input
@@ -118,6 +137,16 @@
                       {{ uye.displayName }}
                     </option>
                   </select>
+                  <label>Kime Kiraladı</label>
+                  <select class="form-control" formControlName="kimekiraladi">
+                    <option value="">Kiralanmadı</option>
+                    <option
+                      *ngFor="let uye of uyeler"
+                      [value]="uye.displayName"
+                    >
+                      {{ uye.displayName }}
+                    </option>
+                  </select>
 
                   <label>Arabanın Modeli</label>
                   <input
@@ -135,7 +164,6 @@
                     formControlName="iadetarih"
                     type="hidden"
                   />
-                  <label>Araba Fotoğrafı</label>
                 </div>
               </div>
               <div class="modal-footer">
@@ -160,7 +188,7 @@
         <div class="modal-dialog">
           <form [formGroup]="frm" (ngSubmit)="DuzenleKaydet()">
             <div class="modal-content">
-              <div class="modal-header bg-primary text-white">
+              <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title">{{ modalBaslik }}</h5>
                 <button
                   type="button"
@@ -190,9 +218,21 @@
                     class="form-control"
                     formControlName="kiralik"
                   >
-                    <option value="Kiralandı">Kiralandı</option>
-                    <option value="Kiralanmadı">Kiralanmadı</option>
+                    <option value="1">Kiralandı</option>
+                    <option value="0">Kiralanmadı</option>
                   </select>
+                  <label>Kiralanma Tarihi</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="kirtarih"
+                  />
+                  <label>İade Tarihi</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="iadetarih"
+                  />
                   <label for="">Kiralama Ücreti (Günlük)</label>
                   <input
                     type="number"
@@ -220,6 +260,16 @@
                   </select>
                   <label>Kim Kiraladı</label>
                   <select class="form-control" formControlName="kimkiraladi">
+                    <option value="">Kiralanmadı</option>
+                    <option
+                      *ngFor="let uye of uyeler"
+                      [value]="uye.displayName"
+                    >
+                      {{ uye.displayName }}
+                    </option>
+                  </select>
+                  <label>Kime Kiraladı</label>
+                  <select class="form-control" formControlName="kimekiraladi">
                     <option value="">Kiralanmadı</option>
                     <option
                       *ngFor="let uye of uyeler"

@@ -1,5 +1,36 @@
 <div class="container">
   <div class="row mt-3">
-    <div class="col-md-6"></div>
+    <div class="col-md-4 mt-3" *ngFor="let araba of arabalar">
+      <div class="card" style="width: 22rem">
+        <div class="card-header">
+          <img class="card-img-top" [src]="araba.foto" />
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-horizontal mt-3">
+            <li class="list-group-item">{{ araba.arabaadi }}</li>
+            <li class="list-group-item">{{ araba.arabamodel }}</li>
+            <li class="list-group-item">{{ araba.categoryId }}</li>
+          </ul>
+          <ul class="list-group list-group-horizontal mt-3">
+            <li class="list-group-item">{{ araba.vites }}</li>
+            <li class="list-group-item" *ngIf="araba.kiralik == 1">
+              Kiralandı
+            </li>
+            <li class="list-group-item" *ngIf="araba.kiralik == 0">
+              Kiralanmadı
+            </li>
+            <li class="list-group-item" *ngIf="araba.kiralik == 1">
+              Tahmini Dönüş Tarihi <br />
+              {{ araba.iadetarih }}
+            </li>
+          </ul>
+          <ul class="list-group list-group-horizontal mt-3">
+            <li class="list-group-item">
+              Kiralama Ücreti/Gün: {{ araba.kirucret }} TL
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

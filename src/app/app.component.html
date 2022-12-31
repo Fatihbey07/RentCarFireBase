@@ -30,12 +30,20 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/araba"
+          <a
+            *ngIf="user.admin == 1"
+            class="nav-link active"
+            aria-current="page"
+            href="/araba"
             ><i class="bi bi-car-front-fill"></i> Arabalar</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/kategori"
+          <a
+            *ngIf="user.admin == 1"
+            class="nav-link active"
+            aria-current="page"
+            href="/kategori"
             ><i class="bi bi-bookmarks-fill"></i> Kategoriler</a
           >
         </li>
@@ -46,11 +54,6 @@
             href="/uyeler"
             *ngIf="user.admin == 1"
             ><i class="bi bi-people-fill"> </i> Üyeler</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/signup"
-            ><i class="bi bi-people-fill"> </i> Üye Ekle</a
           >
         </li>
       </ul>

@@ -2,7 +2,7 @@ export class Araba {
   uid!: string;
   arabaadi!: string;
   categoryId!: number;
-  kiralik!: string;
+  kiralik!: number;
   kirtarih!: string;
   iadetarih!: string;
   vites!: string;
