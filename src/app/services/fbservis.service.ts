@@ -1,3 +1,4 @@
+import { Talep } from './../models/Talep';
 import { Kategori } from './../models/Kategori';
 import { Uye } from './../models/Uye';
 import { Gorev } from '../models/Gorev';
@@ -65,38 +66,38 @@ export class FbservisService {
     );
   }
 
-  GorevListele() {
-    var ref = collection(this.fs, 'Gorevler');
+  TalepListele() {
+    var ref = collection(this.fs, 'Talepler');
     return this.aktifUye.pipe(
-      concatMap((user) => {
-        const myQuery = query(ref, where('uid', '==', user?.uid));
-        return collectionData(myQuery, { idField: 'gorevId' }) as Observable<
-          Gorev[]
+      concatMap(() => {
+        const myQuery = query(ref);
+        return collectionData(myQuery, { idField: 'talepId' }) as Observable<
+          Talep[]
         >;
       })
     );
   }
-  GorevEkle(gorev: Gorev) {
-    var ref = collection(this.fs, 'Gorevler');
+  TalepEkle(talep: Talep) {
+    var ref = collection(this.fs, 'Talepler');
     return this.aktifUye.pipe(
-      take(1),
       concatMap((user) =>
         addDoc(ref, {
-          baslik: gorev.baslik,
-          aciklama: gorev.aciklama,
-          tamam: gorev.tamam,
+          arabaadi: talep.arabaadi,
+          kirtarih: talep.kirtarih,
+          iadetarih: talep.iadetarih,
+          talepkim: talep.talepkim,
           uid: user?.uid,
         })
       ),
       map((ref) => ref.id)
     );
   }
-  GorevDuzenle(gorev: Gorev) {
-    var ref = doc(this.fs, 'Gorevler/' + gorev.gorevId);
-    return updateDoc(ref, { ...gorev });
+  TalepDuzenle(talep: Talep) {
+    var ref = doc(this.fs, 'Talepler/' + talep.talepId);
+    return updateDoc(ref, { ...talep });
   }
-  GorevSil(gorev: Gorev) {
-    var ref = doc(this.fs, 'Gorevler/' + gorev.gorevId);
+  TalepSil(talep: Talep) {
+    var ref = doc(this.fs, 'Talepler/' + talep.talepId);
     return deleteDoc(ref);
   }
 

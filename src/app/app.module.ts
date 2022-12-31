@@ -1,3 +1,4 @@
+import { TaleplerComponent } from './components/talepler/talepler.component';
 import { UyelerComponent } from './components/uyeler/uyeler.component';
 import { KategorilerComponent } from './components/kategoriler/kategoriler.component';
 import { ArabalarComponent } from './components/arabalar/arabalar.component';
@@ -28,6 +29,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     ArabalarComponent,
     KategorilerComponent,
     UyelerComponent,
+    TaleplerComponent,
   ],
   imports: [
     BrowserModule,

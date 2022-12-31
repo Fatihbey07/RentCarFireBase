@@ -3,7 +3,12 @@
     <div class="col-md-4 mt-3" *ngFor="let araba of arabalar">
       <div class="card" style="width: 22rem">
         <div class="card-header">
-          <img class="card-img-top" [src]="araba.foto" />
+          <img
+            class="card-img-top"
+            [src]="araba.foto"
+            width="250rem"
+            height="200rem"
+          />
         </div>
         <div class="card-body">
           <ul class="list-group list-group-horizontal mt-3">
@@ -29,6 +34,72 @@
               Kiralama Ücreti/Gün: {{ araba.kirucret }} TL
             </li>
           </ul>
+          <button
+            (click)="Kirala(araba, kiristek)"
+            class="btn btn-success mt-3"
+          >
+            Kiralama İsteği Oluştur
+          </button>
+        </div>
+      </div>
+      <div class="modal" tabindex="-1" #kiristek>
+        <div class="modal-dialog">
+          <form [formGroup]="frm" (ngSubmit)="Talep()">
+            <div class="modal-content">
+              <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">İstek Formu</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body bg-light">
+                <label>Kim Talep Ediyor?</label>
+                <select class="form-control" formControlName="talepkim">
+                  <option
+                    *ngIf="uye | async as user"
+                    [value]="user.displayName"
+                  >
+                    {{ user.displayName }}
+                  </option>
+                </select>
+                <label>Araba Adı</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="arabaadi"
+                />
+                <label>Kiralama Tarihi</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="kirtarih"
+                />
+                <label>İade Tarihi</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="iadetarih"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Kapat
+                </button>
+                <input
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  value="Talep Oluştur"
+                />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

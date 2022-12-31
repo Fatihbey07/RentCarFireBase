@@ -1,3 +1,4 @@
+import { TaleplerComponent } from './components/talepler/talepler.component';
 import { UyelerComponent } from './components/uyeler/uyeler.component';
 import { ArabalarComponent } from './components/arabalar/arabalar.component';
 import { ProfilComponent } from './components/profil/profil.component';
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'araba',
     component: ArabalarComponent,
+    ...canActivate(redirectToLogin),
+  },
+  {
+    path: 'talep',
+    component: TaleplerComponent,
     ...canActivate(redirectToLogin),
   },
   {
