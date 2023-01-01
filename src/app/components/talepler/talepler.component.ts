@@ -33,6 +33,7 @@ export class TaleplerComponent implements OnInit {
     talep.tamam = d;
     this.fbservis.TalepDuzenle(talep).then(() => {});
   }
+  KiralaOnayla() {}
   UyeListele() {
     this.fbservis.UyeListele().subscribe((d) => {
       this.uyeler = d;

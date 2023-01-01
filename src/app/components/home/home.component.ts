@@ -30,8 +30,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.ArabaListele();
-    this.fbServis.AktifUyeBilgi;
-    this.UyeListele();
   }
 
   ArabaListele() {
@@ -56,13 +54,5 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe();
-  }
-  UyeListele() {
-    this.fbServis.UyeListele().subscribe((d) => {
-      this.uyeler = d;
-    });
-  }
-  tikla() {
-    console.log(this.fbServis.AktifUyeBilgi);
   }
 }

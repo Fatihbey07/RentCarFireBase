@@ -57,7 +57,11 @@
               </div>
               <div class="modal-body bg-light">
                 <label>Kim Talep Ediyor?</label>
-                <select class="form-control" formControlName="talepkim">
+                <select
+                  class="form-control"
+                  formControlName="talepkim"
+                  required
+                >
                   <option
                     *ngIf="uye | async as user"
                     [value]="user.displayName"

@@ -10,6 +10,7 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./uyeler.component.css'],
 })
 export class UyelerComponent implements OnInit {
+  uye = this.fbServis.AktifUyeBilgi;
   uyeler!: Uye[];
   modalBaslik: string | undefined;
   modal!: Modal;
@@ -17,6 +18,7 @@ export class UyelerComponent implements OnInit {
   tel: number | undefined;
   displayName: string | undefined;
   email: string | undefined;
+  foto: string | undefined;
   frm: FormGroup = new FormGroup({
     uid: new FormControl(),
     email: new FormControl(),
@@ -45,6 +47,7 @@ export class UyelerComponent implements OnInit {
     this.displayName = uye.displayName;
     this.adres = uye.adres;
     this.tel = uye.tel;
+    this.foto = uye.foto;
     this.modal = new bootstrap.Modal(el);
     this.modal.show();
   }
