@@ -19,11 +19,13 @@ import { addDoc, updateDoc } from '@firebase/firestore';
 import {
   Auth,
   authState,
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
   User,
   UserInfo,
+  signInWithPopup,
 } from '@angular/fire/auth';
 import {
   getDownloadURL,
@@ -49,6 +51,9 @@ export class FbservisService {
   }
   OturumAc(mail: string, parola: string) {
     return from(signInWithEmailAndPassword(this.auth, mail, parola));
+  }
+  GoogleOturumAc() {
+    return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
   }
   OturumKapat() {
     return from(this.auth.signOut());

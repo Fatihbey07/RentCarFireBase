@@ -6,25 +6,38 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   constructor(
     public fbServis: FbservisService,
     public htoast: HotToastService,
     public router: Router
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   OturumAc(mail: string, parola: string) {
-    this.fbServis.OturumAc(mail, parola)
+    this.fbServis
+      .OturumAc(mail, parola)
       .pipe(
         this.htoast.observe({
           success: 'Oturum Açıldı',
           loading: 'Oturum Açılıyor...',
-          error: ({ message }) => `${message}`
+          error: ({ message }) => `${message}`,
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['']);
+      });
+  }
+  GoogleOturumAc() {
+    this.fbServis
+      .GoogleOturumAc()
+      .pipe(
+        this.htoast.observe({
+          success: 'Oturum Açıldı',
+          loading: 'Oturum Açılıyor...',
+          error: ({ message }) => `${message}`,
         })
       )
       .subscribe(() => {

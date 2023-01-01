@@ -18,13 +18,17 @@
         </div>
         <div class="card-footer bg-warning text-white">
           <button
-            class="btn btn-success me-3"
+            class="btn btn-success"
             (click)="OturumAc(mail.value, parola.value)"
           >
             Giriş
           </button>
-          <button class="btn btn-primary ms-2" [routerLink]="['/signup']">
+          <button class="btn btn-primary ms-1" [routerLink]="['/signup']">
             Üye Ol
+          </button>
+          <button class="btn btn-light ms-1" (click)="GoogleOturumAc()">
+            <img src="../assets/google.png" width="30px" height="20px" />Google
+            İle Giriş Yap
           </button>
         </div>
       </div>
