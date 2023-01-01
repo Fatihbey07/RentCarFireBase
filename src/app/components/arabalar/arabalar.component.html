@@ -37,7 +37,7 @@
             <td>{{ araba.iadetarih }}</td>
             <td>{{ araba.vites }}</td>
             <td>{{ araba.arabamodel }}</td>
-            <td>{{ araba.kirucret }}</td>
+            <td>{{ araba.kirucret }} TL</td>
             <td>{{ araba.kimkiraladi }}</td>
             <td>{{ araba.kimekiraladi }}</td>
             <td>
@@ -108,6 +108,7 @@
                     class="form-control"
                     formControlName="kirucret"
                   />
+                  TL
                   <label>Araba Kategorisi</label>
                   <select
                     required
@@ -189,10 +190,10 @@
           <form [formGroup]="frm" (ngSubmit)="DuzenleKaydet()">
             <div class="modal-content">
               <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">{{ modalBaslik }}</h5>
+                <h5 class="modal-title input-group-text">{{ modalBaslik }}</h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  class="btn-close bg-light"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
@@ -226,12 +227,14 @@
                     type="text"
                     class="form-control"
                     formControlName="kirtarih"
+                    placeholder="GG/AA/YYYY"
                   />
                   <label>İade Tarihi</label>
                   <input
                     type="text"
                     class="form-control"
                     formControlName="iadetarih"
+                    placeholder="GG/AA/YYYY"
                   />
                   <label for="">Kiralama Ücreti (Günlük)</label>
                   <input
@@ -239,6 +242,7 @@
                     class="form-control"
                     formControlName="kirucret"
                   />
+                  TL
                   <label>Araba Kategorisi</label>
                   <select
                     required

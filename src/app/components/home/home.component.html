@@ -47,16 +47,18 @@
           <form [formGroup]="frm" (ngSubmit)="Talep()">
             <div class="modal-content">
               <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">İstek Formu</h5>
+                <h5 class="modal-title">
+                  <span class="input-group-text">İstek Formu</span>
+                </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  class="btn-close bg-light"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
               <div class="modal-body bg-light">
-                <label>Kim Talep Ediyor?</label>
+                <label class="text-center">Kim Talep Ediyor?</label>
                 <select
                   class="form-control"
                   formControlName="talepkim"

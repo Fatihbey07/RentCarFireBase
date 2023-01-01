@@ -4,26 +4,26 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header bg-dark text-white">
-          <h4>Üye Giriş Ekranı</h4>
+          <h4 class="text-center">Üye Giriş Ekranı</h4>
         </div>
         <div class="card-body bg-warning text-white">
-          <div class="form-group">
-            <label>E-Posta</label>
+          <div class="input-group">
+            <span class="input-group-text">E-Posta</span>
             <input type="text" class="form-control" #mail />
           </div>
-          <div class="form-group">
-            <label>Parola</label>
+          <div class="input-group mt-3">
+            <span class="input-group-text">Parola</span>
             <input type="password" class="form-control" #parola />
           </div>
         </div>
-        <div class="card-footer bg-info text-white">
+        <div class="card-footer bg-warning text-white">
           <button
-            class="btn btn-success"
+            class="btn btn-success me-3"
             (click)="OturumAc(mail.value, parola.value)"
           >
             Giriş
           </button>
-          <button class="btn btn-secondary ms-2" [routerLink]="['/signup']">
+          <button class="btn btn-primary ms-2" [routerLink]="['/signup']">
             Üye Ol
           </button>
         </div>
