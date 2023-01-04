@@ -1,3 +1,4 @@
+import { Uye } from './../../models/Uye';
 import { HotToastService } from '@ngneat/hot-toast';
 import { FbservisService } from './../../services/fbservis.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  uyeler!: Uye[];
   constructor(
     public fbServis: FbservisService,
     public htoast: HotToastService,
@@ -40,7 +42,9 @@ export class LoginComponent implements OnInit {
           error: ({ message }) => `${message}`,
         })
       )
-      .subscribe(() => {
+      .subscribe((s) => {
+        console.log(s.user.displayName, s.user.email);
+
         this.router.navigate(['']);
       });
   }

@@ -40,6 +40,7 @@ import { Araba } from '../models/Araba';
 })
 export class FbservisService {
   aktifUye = authState(this.auth);
+
   constructor(
     public fs: Firestore,
     public auth: Auth,
