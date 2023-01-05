@@ -1,7 +1,7 @@
 import { Talep } from './../models/Talep';
 import { Kategori } from './../models/Kategori';
 import { Uye } from './../models/Uye';
-import { Gorev } from '../models/Gorev';
+
 import { Injectable } from '@angular/core';
 import {
   collection,
