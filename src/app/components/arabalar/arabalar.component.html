@@ -1,7 +1,15 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-sm">
+      <div class="col-md-4 mt-2 ms-2">
+        <button
+          class="btn btn-warning btn-full"
+          (click)="Ekle(modalEkleDuzenle)"
+        >
+          <i class="bi bi-car-front"></i>Araba Ekle
+        </button>
+      </div>
+      <table class="table table-sm mt-3">
         <thead class="bg-dark text-white">
           <th>Araba Foto</th>
           <th>Araba Adı</th>
@@ -374,11 +382,6 @@
           </form>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mt-5 ms-5">
-      <button class="btn btn-warning btn-full" (click)="Ekle(modalEkleDuzenle)">
-        <i class="bi bi-car-front"></i>Araba Ekle
-      </button>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@
           <th>Adres</th>
           <th>Telefon</th>
           <th>Admin mi?</th>
-          <th>Görüntüle</th>
+
           <th>Düzenle</th>
           <th>Sil</th>
         </thead>
@@ -39,14 +39,7 @@
               <span class="badge bg-success" *ngIf="uye.admin == 1">Evet</span>
               <span class="badge bg-danger" *ngIf="uye.admin == 0">Hayır</span>
             </td>
-            <td>
-              <button
-                class="btn btn-info ms-3"
-                (click)="Goruntule(uye, modaldetay)"
-              >
-                Detay
-              </button>
-            </td>
+
             <td>
               <button
                 class="btn btn-warning ms-3"
@@ -61,99 +54,59 @@
               </button>
             </td>
           </tr>
-          <tr>
-            <div class="modal modal-sm" tabindex="-1" #modaldetay>
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">{{ modalBaslik }}</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <img class="img-fluid" src="{{ foto }}" />
-
-                    <ul>
-                      <li>{{ displayName }}</li>
-                    </ul>
-                    <ul>
-                      <li>{{ email }}</li>
-                    </ul>
-                    <ul>
-                      <li>{{ tel }}</li>
-                    </ul>
-                    <ul>
-                      <li>{{ adres }}</li>
-                    </ul>
-                  </div>
-
-                  <div class="modal-footer"></div>
-                </div>
-              </div>
-            </div>
-          </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" #modalEkleDuzenle>
+  <div class="modal-dialog">
+    <form [formGroup]="frm" (ngSubmit)="UyeEkleDuzenle()">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">{{ modalBaslik }}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Üye Adı Soyadı</label>
+            <input
+              type="text"
+              readonly
+              class="form-control"
+              formControlName="displayName"
+            />
+            <label>Üye E-Posta</label>
+            <input
+              type="text"
+              readonly
+              class="form-control"
+              formControlName="email"
+            />
 
-      <div class="modal" tabindex="-1" #modalEkleDuzenle>
-        <div class="modal-dialog">
-          <form [formGroup]="frm" (ngSubmit)="UyeEkleDuzenle()">
-            <div class="modal-content">
-              <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">{{ modalBaslik }}</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label>Üye Adı Soyadı</label>
-                  <input
-                    type="text"
-                    readonly
-                    class="form-control"
-                    formControlName="displayName"
-                  />
-                  <label>Üye E-Posta</label>
-                  <input
-                    type="text"
-                    readonly
-                    class="form-control"
-                    formControlName="email"
-                  />
-
-                  <label>Yönetici mi</label>
-                  <select class="form-control" formControlName="admin">
-                    <option value="1">Evet</option>
-                    <option value="0">Hayır</option>
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <input
-                  type="submit"
-                  class="btn btn-outline-primary"
-                  value="Kaydet"
-                />
-                <button
-                  type="button"
-                  class="btn btn-outline-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Kapat
-                </button>
-              </div>
-            </div>
-          </form>
+            <label>Yönetici mi</label>
+            <select class="form-control" formControlName="admin">
+              <option value="1">Evet</option>
+              <option value="0">Hayır</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-outline-primary" value="Kaydet" />
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+          >
+            Kapat
+          </button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
