@@ -4,7 +4,8 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { Kategori } from './../../models/Kategori';
 import { FbservisService } from 'src/app/services/fbservis.service';
 import { Component, OnInit } from '@angular/core';
-
+import { Modal } from 'bootstrap';
+import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-kategoriler',
   templateUrl: './kategoriler.component.html',
@@ -12,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KategorilerComponent implements OnInit {
   kategoriler!: Kategori[];
+  modal!: Modal;
+  modalBaslik: string = '';
   frm: FormGroup = new FormGroup({
     kid: new FormControl(),
     adi: new FormControl(),
@@ -61,5 +64,28 @@ export class KategorilerComponent implements OnInit {
           .subscribe();
       }
     }
+  }
+  DuzenleKaydet() {
+    var kategori: Kategori = this.frm.value;
+    if (!kategori.adi) {
+      this.htoast.warning('Alanlar boş geçilemez');
+    } else {
+      this.fbServis
+        .KategoriDuzenle(kategori)
+        .pipe(
+          this.htoast.observe({
+            loading: 'Kategori Düzenleniyor',
+            success: 'Kategori Düzenlendi',
+            error: 'Kategori Düzenlenirken Hata oluştu',
+          })
+        )
+        .subscribe();
+    }
+  }
+  Duzenle(kategori: Kategori, el: HTMLElement) {
+    this.frm.patchValue(kategori);
+    this.modalBaslik = 'Kategori Düzenle';
+    this.modal = new bootstrap.Modal(el);
+    this.modal.show();
   }
 }

@@ -320,43 +320,6 @@
         </div>
       </div>
 
-      <div class="modal" tabindex="-1" #modalSil>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-              <h5 class="modal-title">{{ modalBaslik }}</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <h6 *ngIf="secAraba">
-                {{ secAraba.arabaadi }} adlı Araba Silinecektir Onaylıyor
-                musunuz?
-              </h6>
-            </div>
-            <div class="modal-footer">
-              <button
-                class="btn btn-outline-danger"
-                *ngIf="secAraba"
-                (click)="Sil(secAraba)"
-              >
-                Sil
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-primary"
-                data-bs-dismiss="modal"
-              >
-                Kapat
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="modal" tabindex="-1" #modalKirala>
         <div class="modal-dialog">
           <form [formGroup]="frm" (ngSubmit)="EkleKaydet()">
